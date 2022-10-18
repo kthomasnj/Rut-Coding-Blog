@@ -25,6 +25,7 @@ Posts.init(
       },
       date_time: {
         type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
         allowNull: false
       }
     },

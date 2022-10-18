@@ -1,0 +1,7 @@
+[
+    {
+        "title": "Why MVC is so important",
+        "post_text": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
+        "author": "Xandromus"
+    }
+  ]

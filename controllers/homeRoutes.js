@@ -1,9 +1,10 @@
 const router = require('express').Router();
+const session = require('express-session');
 const { Posts, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get("/", async (req, res) => {
-    try {
+
         const postData = await Posts.findAll({
             include: [
                 {
@@ -13,25 +14,35 @@ router.get("/", async (req, res) => {
             ],
         });
 
-        const posts = postData.map((project) => this.post.get({ plain: true }));
-
+        const posts = postData.map((posts) => posts.get({ plain: true }));
+        
         res.render('homepage', {
+            posts: posts,
+            logged_in: req.session.logged_in
+        });
+});
+
+router.get("/dashboard", withAuth, async (req, res) => {
+    
+    const postData = await Posts.findAll({
+        Where: { id: req.session.user_id },
+        include: [
+            {
+                model: User,
+                attributes: ['Name'],
+            },
+        ],
+    });
+    
+    const posts = postData.map((posts) => posts.get({ plain: true }));
+    
+    console.log(`Posts: `, postData);
+        
+        res.render('dashboard', {
             posts,
             logged_in: req.session.logged_in
         });
-    } catch (err) {
-        res.status(500).json(err);
-    }
 });
-
-router.get('/dashboard', withAuth, async (req, res) => {
-
-    res.render('dashboard', {
-      logged_in: true
-    });
- 
-  }
-);
 
 router.get("/login", (req, res) => {
     res.render('login');

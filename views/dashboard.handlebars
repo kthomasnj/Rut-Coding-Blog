@@ -1,8 +1,22 @@
 <h1>DASHBOARD</h1>
 
-{{#each posts as |post|}}
-{{> post-details}}
-{{/each}}
+<div class="postsClass">
+    {{#each posts}} 
+    <div class="row mb-4 project">
+        <div class="col-md-5">
+            <h2>
+               {{title}}
+            </h2>
+            <p> Created: {{createdAt}}-- Author: {{author}}</p>
+        </div>
+        <div class="col-md-7">
+            <p>
+                {{post_text}}
+            </p>
+        </div>
+    </div>
+    {{/each}}
+</div>
 
 <button class="btn btn-primary">+ New Post</button>
 

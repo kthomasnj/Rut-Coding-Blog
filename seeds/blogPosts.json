@@ -1,22 +1,22 @@
 [
     {
         "title": "Why MVC is so important",
-        "post_text": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
+        "postText": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
         "author": "Keith Thomas"    
     },
     {
         "title": "I love this class",
-        "post_text": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
+        "postText": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
         "author": "Takesha Thomas"   
     },
     {
         "title": "This class is okay",
-        "post_text": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
+        "postText": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
         "author": "Michaela Thomas"   
     },
     {
         "title": "This class could be better",
-        "post_text": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
+        "postText": "MVC allows developers to maintain a true separation of concens, devision their code between the Modl layer for data, the View layer for design and the Controller layer for applications logic",
         "author": "Zairea Thomas"   
     }
 

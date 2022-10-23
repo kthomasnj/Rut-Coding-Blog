@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
+
+    console.log(req.body);
   
     const userData = await User.create(req.body);
 
@@ -59,12 +61,12 @@ router.post('/logout', (req, res) => {
 router.get('/', async (req, res) => {
 
   const userData = await User.findOne({ where: { id: req.session.user_id } });
-  const userName=userData.dataValues.name;
+  const name=userData.dataValues.name;
 
-  console.log(userName);
+  console.log(name);
   
   try {
-    res.status(200).send(userName);
+    res.status(200).send(name);
   }
   catch (err) {
     res.status(500).json(err);

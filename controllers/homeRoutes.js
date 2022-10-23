@@ -1,20 +1,22 @@
 const router = require('express').Router();
 const session = require('express-session');
-const { Posts, User } = require('../models');
+const { Blog, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get("/", async (req, res) => {
 
-        const postData = await Posts.findAll({
+        const postData = await Blog.findAll({
             include: [
                 {
                 model: User,
-                attributes: ['Name'],
+                attributes: ['name'],
                 },
             ],
         });
 
         const posts = postData.map((posts) => posts.get({ plain: true }));
+
+        console.log(posts);
         
         res.render('homepage', {
             posts: posts,
@@ -24,12 +26,12 @@ router.get("/", async (req, res) => {
 
 router.get("/dashboard", withAuth, async (req, res) => {
     
-    const postData = await Posts.findAll({
-        Where: { id: req.session.author },
+    const postData = await Blog.findAll({
+        // Where: { id: req.session.author },
         include: [
             {
                 model: User,
-                attributes: ['Name'],
+                attributes: ['name'],
             },
         ],
     });

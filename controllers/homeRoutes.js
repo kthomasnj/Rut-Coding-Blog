@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
     
     const postData = await Posts.findAll({
-        Where: { id: req.session.user_id },
+        Where: { id: req.session.author },
         include: [
             {
                 model: User,
@@ -35,8 +35,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
     
     const posts = postData.map((posts) => posts.get({ plain: true }));
-    
-    console.log(`Posts: `, postData);
         
         res.render('dashboard', {
             posts,

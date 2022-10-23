@@ -6,14 +6,14 @@ router.post('/', async (req, res) => {
     const currentUser = req.body.name;
   
     const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
+  
+  req.session.save(() => {
+    req.session.logged_in = true;      
+    const currentUser = userData.name;
+    
       res.render('dashboard',{
         logged_in: req.session.logged_in,
-        currentUser
+        loggedInUser: currentUser
       });
     });
   

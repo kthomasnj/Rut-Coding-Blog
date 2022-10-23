@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
     
     const postData = await Blog.findAll({
-        // Where: { id: req.session.author },
+        Where: { id: req.session.name },
         include: [
             {
                 model: User,

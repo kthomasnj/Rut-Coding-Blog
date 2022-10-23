@@ -3,7 +3,7 @@ const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
 
-    console.log(req.body);
+    const currentUser = req.body.name;
   
     const userData = await User.create(req.body);
 
@@ -11,7 +11,10 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.render('dashboard',{logged_in: req.session.logged_in});
+      res.render('dashboard',{
+        logged_in: req.session.logged_in,
+        currentUser
+      });
     });
   
 });

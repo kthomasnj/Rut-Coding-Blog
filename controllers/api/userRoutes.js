@@ -8,8 +8,8 @@ router.post('/', async (req, res) => {
     const userData = await User.create(req.body);
   
   req.session.save(() => {
-    req.session.logged_in = true;      
-    const currentUser = userData.name;
+    req.session.logged_in = true;
+    req.session.user_id = userData.id;
     
       res.render('dashboard',{
         logged_in: req.session.logged_in,

@@ -35,10 +35,15 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
     
     const posts = postData.map((posts) => posts.get({ plain: true }));
+
+    // const currentUser = await User.findOne({ where: { email: req.body.email } });
+
+    //   const loggedInperson =  currentUser.dataValues.name;
         
         res.render('dashboard', {
             posts,
             logged_in: req.session.logged_in
+            // loggedInUser: loggedInperson
         });
 });
 

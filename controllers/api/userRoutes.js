@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    
     if (!userData) {
       res
         .status(400)
@@ -37,13 +37,15 @@ router.post('/login', async (req, res) => {
         .status(400)
         .json({ message: 'Your email or password is incorrect.' });
       return;
-    }
-
-    req.session.save(() => {
+    }    
+    
+    req.session.save(async () => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.render('dashboard',{logged_in: req.session.logged_in});
+      const currentUser = await User.findOne({ where: { email: req.body.email } });
+
+      res.render('dashboard',{logged_in: req.session.logged_in, loggedInUser: currentUser.dataValues.name});
     });
 
   } catch (err) {

@@ -1,31 +1,11 @@
 const router = require('express').Router();
 const session = require('express-session');
-const { Blog, User } = require('../models');
+const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get("/", async (req, res) => {
 
-        const postData = await Blog.findAll({
-            include: [
-                {
-                model: User,
-                attributes: ['name'],
-                },
-            ],
-        });
-
-        const posts = postData.map((posts) => posts.get({ plain: true }));
-        
-        res.render('homepage', {
-            posts: posts,
-            logged_in: req.session.logged_in
-        });
-});
-
-router.get("/dashboard", withAuth, async (req, res) => {
-    
-    const postData = await Blog.findAll({
-        Where: { author: req.session.name },
+    const postData = await Post.findAll({
         include: [
             {
                 model: User,
@@ -33,18 +13,37 @@ router.get("/dashboard", withAuth, async (req, res) => {
             },
         ],
     });
-    
+
     const posts = postData.map((posts) => posts.get({ plain: true }));
 
-    // const currentUser = await User.findOne({ where: { email: req.body.email } });
+    res.render('homepage', {
+        posts: posts,
+        logged_in: req.session.logged_in
+    });
+});
 
-    //   const loggedInperson =  currentUser.dataValues.name;
-        
-        res.render('dashboard', {
-            posts,
-            logged_in: req.session.logged_in
-            // loggedInUser: loggedInperson
-        });
+router.get("/dashboard", withAuth, async (req, res) => {
+    const currentUser = await User.findByPk(req.session.user_id);
+
+    const loggedInperson = currentUser.dataValues.name;
+
+    const postData = await Blog.findAll({
+        where: { author: loggedInperson },
+        include: [
+            {
+                model: User,
+                attributes: ['name'],
+            },
+        ],
+    });
+
+    const posts = postData.map((posts) => posts.get({ plain: true }));
+
+    res.render('dashboard', {
+        posts,
+        logged_in: req.session.logged_in,
+        loggedInUser: loggedInperson
+    });
 });
 
 router.get("/login", (req, res) => {
@@ -53,10 +52,23 @@ router.get("/login", (req, res) => {
 
 router.get('/signup', async (req, res) => {
     try {
-      res.render('signup');
+        res.render('signup');
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
+});
+router.get('/post/:id', async (req, res) => {
+    try{ 
+        const postData = await Post.findByPk(req.params.id);
+        if(!postData) {
+            res.status(404).json({message: 'No post with this id!'});
+            return;
+        }
+        const dish = postData.get({ plain: true });
+        res.render('post', dish);
+      } catch (err) {
+          res.status(500).json(err);
+      };     
   });
 
 module.exports = router;

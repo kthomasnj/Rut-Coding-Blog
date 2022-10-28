@@ -6,7 +6,7 @@
         <div id="blog-post" class="navbar navbar-expand-lg p-1">
             <h2 class="p-3">{{title}}</h2>
             <ul class="navbar-nav ms-auto p-3">
-                <li>Created: {{createdAt}} |</li>
+                <li>Created: {{format_date createdAt}} |</li>
                 <li>| Author: {{author}}</li>
             </ul>
         </div>
@@ -17,6 +17,6 @@
     {{/each}}
 </div>
 
-<button class="btn btn-primary">+ New Post</button>
+<button id="newPost" class="btn btn-primary">+ New Post</button>
 
 <script src="./js/logout.js"></script>

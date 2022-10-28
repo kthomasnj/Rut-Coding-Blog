@@ -43,9 +43,12 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      const currentUser = await User.findOne({ where: { email: req.body.email } });
+      // const currentUser = await User.findOne({ where: { email: req.body.email } });
 
-      res.render('dashboard',{logged_in: req.session.logged_in, loggedInUser: currentUser.dataValues.name});
+      // console.log(`currentUser: `, currentUser.dataValues.name);
+
+      res.render('dashboard',{userData: {logged_in: req.session.logged_in}});
+      // res.render('dashboard',{userData: {logged_in: `Test`, loggedInUser: `test2`}});
     });
 
   } catch (err) {

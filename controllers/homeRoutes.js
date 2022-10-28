@@ -27,7 +27,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
     const loggedInperson = currentUser.dataValues.name;
 
-    const postData = await Blog.findAll({
+    const postData = await Post.findAll({
         where: { author: loggedInperson },
         include: [
             {

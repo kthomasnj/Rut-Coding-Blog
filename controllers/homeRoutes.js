@@ -64,8 +64,11 @@ router.get('/post/:id', async (req, res) => {
             res.status(404).json({message: 'No post with this id!'});
             return;
         }
-        const dish = postData.get({ plain: true });
-        res.render('post', dish);
+        const posts = postData.get({ plain: true });
+
+        res.render('post', {
+            posts
+        });
       } catch (err) {
           res.status(500).json(err);
       };     

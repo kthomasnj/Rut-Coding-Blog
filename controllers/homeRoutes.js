@@ -22,6 +22,12 @@ router.get("/", async (req, res) => {
     });
 });
 
+router.get("/create", withAuth, (req, res) => {
+    res.render('create', {
+        logged_in: req.session.logged_in
+    })
+});
+
 router.get("/dashboard", withAuth, async (req, res) => {
     const currentUser = await User.findByPk(req.session.user_id);
 

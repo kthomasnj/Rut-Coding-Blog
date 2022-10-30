@@ -1,5 +1,3 @@
-
-
 document
 .querySelector('#newPost')
-.addEventListener('submit', loginFormHandler);
+.addEventListener('click', (req, res) => res.render('create'));

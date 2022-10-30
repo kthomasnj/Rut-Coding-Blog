@@ -21,7 +21,8 @@ Post.init(
       },
       author: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'Anonymous'
       },
     },
     {

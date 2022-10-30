@@ -52,9 +52,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
 });
 
-router.get("/login", (req, res) => {
-    res.render('login');
-});
+router.get("/login", (req, res) => res.render('login'));
 
 router.get('/signup', async (req, res) => {
     try {
@@ -63,6 +61,7 @@ router.get('/signup', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 router.get('/post/:id', async (req, res) => {
     try{ 
         const postData = await Post.findByPk(req.params.id);
@@ -80,21 +79,19 @@ router.get('/post/:id', async (req, res) => {
       };     
   });
 
-  router.get('/edit/:id', async (req, res) => {
-    try{ 
+  router.get('/edit/:id', async (req, res) => {    
         const postData = await Post.findByPk(req.params.id);
         if(!postData) {
             res.status(404).json({message: 'No post with this id!'});
             return;
         }
+
         const posts = postData.get({ plain: true });
 
         res.render('edit', {
             posts
         });
-      } catch (err) {
-          res.status(500).json(err);
-      };     
-  });
+      }   
+  );
 
 module.exports = router;

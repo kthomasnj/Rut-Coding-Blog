@@ -1,9 +1,9 @@
-async function newPost() {
+async function deletePost() {
     const title = document.querySelector('#title').value;
     const postText = document.querySelector('#postContent').value;
 
-    const response = await fetch(`/api/create`, {
-        method: 'POST',
+    const response = await fetch(`/api/delete/:id`, {
+        method: 'DELETE',
         body: JSON.stringify({
             title,
             postText,
@@ -22,8 +22,4 @@ async function newPost() {
 
 document
     .querySelector('#submit')
-    .addEventListener('click', newPost);
-
-document
-    .querySelector('#delete')
     .addEventListener('click', deletePost);

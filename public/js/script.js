@@ -23,7 +23,3 @@ async function newPost() {
 document
     .querySelector('#submit')
     .addEventListener('click', newPost);
-
-document
-    .querySelector('#delete')
-    .addEventListener('click', deletePost);

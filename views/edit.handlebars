@@ -1,11 +1,11 @@
 <h1>Update Current Post</h1>
 <div class="postsClass">
-    <div id="bp-border">
+    <div>
         <p class="p-3">
             <h2>Title</h2>
-            <input class="p-3 w-75" value={{posts.title}}></input>
+            <input class="p-3 w-75" id="title" value="{{posts.title}}"></input>
             <h2>Content</h2>
-            <input type="text" class="w-75 p-3" value={{posts.postText}}></input>
+            <textarea type="text" id="postContent" class="w-75 p-3">{{posts.postText}}"</textarea>
         </p>
     </div>
     <ul class="navbar-nav ms-auto p-3">
@@ -17,6 +17,6 @@
     <button id="delete">DELETE</button>
 </div>
 
-<script src="./js/logout.js"></script>
-<script src="./js/update.js"></script>
-<script src="./js/delete.js"></script>
+<script src="/js/logout.js"></script>
+<script src="/js/update.js"></script>
+<script src="/js/delete.js"></script>

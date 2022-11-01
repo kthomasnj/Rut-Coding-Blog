@@ -14,15 +14,29 @@
     </div>
 </div>
 <div class="postsClass">
-    <form id="bp-border">
-        <div id="blog-post" class="navbar navbar-expand-lg p-1">
-            <h2 class="p-3">Comment</h2>
+    {{#each comments}}
+    <div id="bp-border">
+        <div  id="comment" class="navbar navbar-expand-lg p-1">
+            <h2 class="p-3">{{title}}</h2>
+            <ul class="navbar-nav ms-auto p-3">
+                <li>Created: {{format_date createdAt}} |</li>
+                <li>| Author: {{author}}</li>
+            </ul>
         </div>
             <p class="p-3">
-                <input type="text" name="comment" id="newComment" class="w-75">
+                {{postText}}
             </p>
+    </div>
+<div class="postsClass">
+    <div id="bp-border">
+        <div id="blog-post" class="navbar navbar-expand-lg p-1">
+            <h2 class="p-3">New Comment</h2>
+        </div>
+            <p class="p-3">
+                <textarea type="text" name="comment" id="newComment" class="w-75"></textarea>
+            </p>
+    </div>
         <button type="submit">SUBMIT</button>
-    </form>
 </div>
 
 {{#if logged_in}}

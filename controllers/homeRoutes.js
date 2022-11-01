@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const session = require('express-session');
-const { Post, User } = require('../models');
+const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get("/", async (req, res) => {
@@ -71,8 +71,16 @@ router.get('/post/:id', async (req, res) => {
         }
         const posts = postData.get({ plain: true });
 
+        const commentData = await Comment.findAll(req.params.id);
+        if(!commentData) {
+            res.status(404).json({message: 'Post has no comments!'});
+            return;
+        }
+        const comments = commentData.get({ plain: true });
+
         res.render('post', {
-            posts
+            posts,
+            comments
         });
       } catch (err) {
           res.status(500).json(err);

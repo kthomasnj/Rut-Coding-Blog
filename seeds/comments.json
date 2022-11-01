@@ -1,0 +1,27 @@
+[
+    {
+        "postId": 1,
+        "commentText": "I like this topic as well.",
+        "author": "Keith Thomas"
+    },
+    {
+        "postId": 1,
+        "commentText": "I think the topic needs more work.",
+        "author": "Michaela Thomas"
+    },
+    {
+        "postId": 2,
+        "commentText": "I agree!!!",
+        "author": "Takesha Thomas"
+    },
+    {
+        "postId": 3,
+        "commentText": "I have no opinion.",
+        "author": "Zairea Thomas"
+    },
+    {
+        "postId": 4,
+        "commentText": "Zairea can you expand on your comment?.",
+        "author": "Takesha Thomas"
+    }
+]

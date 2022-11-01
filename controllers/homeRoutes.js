@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const session = require('express-session');
-const { Post, Comment, User } = require('../models');
+const { Post, Comments, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get("/", async (req, res) => {
@@ -67,29 +67,23 @@ router.get('/signup', async (req, res) => {
     }
 });
 
-router.get('/post/:id', async (req, res) => {
-    try{ 
+router.get('/post/:id', withAuth, async (req, res) => {
+    console.log(req.params);
         const postData = await Post.findByPk(req.params.id);
+        const commentData = await Comments.findAll(req.params.id);
+
         if(!postData) {
             res.status(404).json({message: 'No post with this id!'});
             return;
         }
         const posts = postData.get({ plain: true });
-
-        const commentData = await Comment.findAll(req.params.id);
-        if(!commentData) {
-            res.status(404).json({message: 'Post has no comments!'});
-            return;
-        }
         const comments = commentData.get({ plain: true });
 
         res.render('post', {
             posts,
-            comments
-        });
-      } catch (err) {
-          res.status(500).json(err);
-      };     
+            comments,
+            logged_in: req.session.logged_in
+        });     
   });
 
   router.get('/edit/:id', async (req, res) => {    

@@ -22,9 +22,14 @@ router.get("/", async (req, res) => {
     });
 });
 
-router.get("/create", withAuth, (req, res) => {
+router.get("/create", withAuth, async (req, res) => {
+    const currentUser = await User.findByPk(req.session.user_id);
+
+    const loggedInperson = currentUser.dataValues.name;
+
     res.render('create', {
-        logged_in: req.session.logged_in
+        logged_in: req.session.logged_in,
+        loggedInUser: loggedInperson
     })
 });
 

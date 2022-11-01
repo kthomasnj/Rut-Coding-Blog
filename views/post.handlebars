@@ -1,4 +1,3 @@
-<h1>Add Your Comment</h1>
 <div class="postsClass">
     <div id="bp-border">
         <div id="blog-post" class="navbar navbar-expand-lg p-1">
@@ -27,6 +26,7 @@
             {{postText}}
         </p>
     </div>
+    {{/each}}
 </div>
 <div class="postsClass">
     <div id="bp-border">
@@ -37,7 +37,7 @@
             <textarea type="text" name="comment" id="newComment" class="w-75"></textarea>
         </p>
     </div>
-    <button type="submit">SUBMIT</button>
+    <button type="submit" class="btn btn-primary">SUBMIT</button>
 </div>
 
 {{#if logged_in}}

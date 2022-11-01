@@ -67,39 +67,67 @@ router.get('/signup', async (req, res) => {
     }
 });
 
+// router.get("/post/:id", (req, res) => {
+//     Post.findByPk(req.params.id,
+//         { 
+//             include: [
+//                 User, { 
+//                     model: Comments,                     
+//                 },
+//             ], 
+//         })
+//         .then((dbPostData) => {
+//             console.log(`DB Post Data: `, dbPostData);
+
+//             if (dbPostData) {
+//                 const post = dbPostData.get({ plain: true });
+//                 res.render("post", { post });
+//             }
+//             else { res.status(404).end(); }
+//         })
+        
+//         .catch((err) =>  { console.log(err)
+//             res.status(500).json(err); });
+// });
+
 router.get('/post/:id', withAuth, async (req, res) => {
-    console.log(req.params);
-        const postData = await Post.findByPk(req.params.id);
-        const commentData = await Comments.findAll(req.params.id);
+        const postData = await Post.findByPk(req.params.id,
+                    { 
+                        include: [
+                            User, { 
+                                model: Comments,                     
+                            },
+                        ], 
+                    })
 
         if(!postData) {
             res.status(404).json({message: 'No post with this id!'});
             return;
         }
         const posts = postData.get({ plain: true });
-        const comments = commentData.get({ plain: true });
+
+        console.log(`Post Data: `, postData.dataValues.comments.[0]);
 
         res.render('post', {
             posts,
-            comments,
             logged_in: req.session.logged_in
         });     
   });
 
-  router.get('/edit/:id', async (req, res) => {    
-        const postData = await Post.findByPk(req.params.id);
-        if(!postData) {
-            res.status(404).json({message: 'No post with this id!'});
-            return;
-        }
+router.get('/edit/:id', async (req, res) => {
+    const postData = await Post.findByPk(req.params.id);
+    if (!postData) {
+        res.status(404).json({ message: 'No post with this id!' });
+        return;
+    }
 
-        const posts = postData.get({ plain: true });
+    const posts = postData.get({ plain: true });
 
-        res.render('edit', {
-            posts,
-            logged_in: req.session.logged_in
-        });
-      }   
-  );
+    res.render('edit', {
+        posts,
+        logged_in: req.session.logged_in
+    });
+}
+);
 
 module.exports = router;

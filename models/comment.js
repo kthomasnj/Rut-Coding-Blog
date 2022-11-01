@@ -1,4 +1,4 @@
-const { noConflict } = require('handlebars');
+// const { noConflict } = require('handlebars');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 

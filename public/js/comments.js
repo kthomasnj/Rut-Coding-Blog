@@ -18,6 +18,10 @@ async function newComment() {
     }
 }
 
+const submitBtn = document.querySelector(`#submit`);
+
+console.log(`Submit Button: `, submitBtn);
+
 document
     .querySelector('#submit')
     .addEventListener('click', newComment);

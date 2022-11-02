@@ -13,18 +13,15 @@
     </div>
 </div>
 <div class="postsClass">
-    {{#each comments}}
+    {{#each posts.comments}}
     <div id="bp-border">
         <div id="comment" class="navbar navbar-expand-lg p-1">
-            <h2 class="p-3">{{title}}</h2>
+            <h4 class="p-3">{{commentText}}</h4>
             <ul class="navbar-nav ms-auto p-3">
                 <li>Created: {{format_date createdAt}} |</li>
                 <li>| Author: {{author}}</li>
             </ul>
         </div>
-        <p class="p-3">
-            {{postText}}
-        </p>
     </div>
     {{/each}}
 </div>
@@ -37,11 +34,8 @@
             <textarea type="text" name="comment" id="newComment" class="w-75"></textarea>
         </p>
     </div>
-    <button type="submit" class="btn btn-primary">SUBMIT</button>
+    <button type="submit" class="btn btn-primary" id="submit">SUBMIT</button>
 </div>
 
-{{#if logged_in}}
-<script src="./js/logout.js"></script>
-{{else}}
-<script src="./js/login.js"></script>
-{{/if}}
+<script src="/js/logout.js"></script>
+<script src="/js/comments.js"></script>

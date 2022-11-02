@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Post = require('../../models/post');
+const Comments = require('../../models/comment');
 const withAuth = require('../../utils/auth');
 
 router.post('/create', async (req, res) => {  
@@ -9,6 +10,15 @@ router.post('/create', async (req, res) => {
                 title: req.body.title,
                 postText: req.body.postText,
                 author: req.body.author
+            });
+        res.status(200).json(post);    
+});
+
+router.post('/comments', async (req, res) => { 
+    console.log('req.body: ', req.body.comments); 
+        const post = await Comments.create(
+            {
+                commentText: req.body
             });
         res.status(200).json(post);    
 });
